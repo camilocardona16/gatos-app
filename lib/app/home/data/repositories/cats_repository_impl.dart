@@ -9,8 +9,8 @@ class CatsRepositoryImpl implements CatsRepository {
   CatsRepositoryImpl(this._userFormDataSource);
 
   @override
-  Future<List<Cat>> getCats() async {
-    final resp = await _userFormDataSource.getCats();
+  Future<List<Cat>> getCats(String? name) async {
+    final resp = await _userFormDataSource.getCats(name);
     return catsFromJson(resp.data);
   }
 }

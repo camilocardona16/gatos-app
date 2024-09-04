@@ -3,7 +3,7 @@ import 'package:gatos_app/core/api_provider.dart';
 import 'package:gatos_app/core/enviorments.dart';
 
 abstract class CatsDataSource {
-  Future<Response<dynamic>> getCats();
+  Future<Response<dynamic>> getCats(String? name);
 }
 
 class CatsDataSourceImpl implements CatsDataSource {
@@ -12,7 +12,12 @@ class CatsDataSourceImpl implements CatsDataSource {
   CatsDataSourceImpl(this._apiProvider);
 
   @override
-  Future<Response<dynamic>> getCats() async {
-    return await _apiProvider.http.get('${Enviorments.api}breeds');
+  Future<Response<dynamic>> getCats(name) async {
+    if (name == null) {
+      return await _apiProvider.http.get('${Enviorments.api}breeds');
+    } else {
+      return await _apiProvider.http.get('${Enviorments.api}breeds/search/',
+          queryParameters: {'name': name});
+    }
   }
 }

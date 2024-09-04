@@ -14,10 +14,13 @@ class ListadoPage extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Expanded(
                       child: TextField(
-                        decoration: InputDecoration(
+                        onSubmitted: (value) {
+                          controller.onSearchTextChange(value);
+                        },
+                        decoration: const InputDecoration(
                           hintText: 'Buscar',
                           prefixIcon: Icon(Icons.search),
                           border: OutlineInputBorder(
@@ -55,8 +58,8 @@ class ListadoPage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(10),
                                         child: Image.network(
                                           controller.cats[index].image!.url,
-                                          height: 100,
-                                          width: 100,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           fit: BoxFit.cover,
                                           loadingBuilder: (context, child,
                                               loadingProgress) {
@@ -86,12 +89,29 @@ class ListadoPage extends StatelessWidget {
                                     fontSize: 15,
                                   ),
                                 ),
-                                Text(
-                                  'Inteligencia: ${controller.cats[index].intelligence}',
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      'Inteligencia:',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Expanded(
+                                      child: LinearProgressIndicator(
+                                        value: controller
+                                                .cats[index].intelligence /
+                                            10,
+                                        backgroundColor: Colors.grey,
+                                        color: Colors.blue,
+                                        minHeight: 10,
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ),

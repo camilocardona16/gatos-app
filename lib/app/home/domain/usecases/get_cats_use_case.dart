@@ -6,7 +6,7 @@ class GetCatsUseCase {
 
   GetCatsUseCase(this._userFormRepository);
 
-  Future<List<Cat>> call() async {
-    return await _userFormRepository.getCats();
+  Future<List<Cat>> call(String? name) async {
+    return await _userFormRepository.getCats(name);
   }
 }

@@ -21,13 +21,15 @@ class ListadoPageController extends GetxController {
   }
 
   void initVars() async {
-    try {
-      cats = await _getCatsUseCase.call();
-      log(Enviorments.token);
-      update();
-    } catch (e) {
-      log(e.toString());
-      log('error---------------------------------------------');
-    }
+    cats = await _getCatsUseCase.call(null);
+    log(Enviorments.token);
+    update();
+  }
+
+  void onSearchTextChange(String text) async {
+    log(text);
+    final response = await _getCatsUseCase.call(text);
+    cats = response;
+    update();
   }
 }
