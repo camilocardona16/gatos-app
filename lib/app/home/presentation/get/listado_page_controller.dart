@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:gatos_app/app/home/domain/entities/document.dart';
 import 'package:gatos_app/app/home/domain/usecases/get_cats_use_case.dart';
-import 'package:gatos_app/core/enviorments.dart';
 import 'package:get/get.dart';
 
 class ListadoPageController extends GetxController {
