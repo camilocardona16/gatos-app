@@ -22,14 +22,11 @@ class ListadoPageController extends GetxController {
 
   void initVars() async {
     cats = await _getCatsUseCase.call(null);
-    log(Enviorments.token);
     update();
   }
 
   void onSearchTextChange(String text) async {
-    log(text);
-    final response = await _getCatsUseCase.call(text);
-    cats = response;
+    cats = await _getCatsUseCase.call(text);
     update();
   }
 }
