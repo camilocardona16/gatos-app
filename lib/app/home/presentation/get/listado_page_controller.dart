@@ -6,7 +6,7 @@ class ListadoPageController extends GetxController {
   final GetCatsUseCase _getCatsUseCase;
 
   late List<Cat> cats = [];
-
+  Cat? catSelected;
   ListadoPageController(
     this._getCatsUseCase,
   );
@@ -24,6 +24,12 @@ class ListadoPageController extends GetxController {
 
   void onSearchTextChange(String text) async {
     cats = await _getCatsUseCase.call(text);
+    update();
+  }
+
+  void onSelectCat(String text) async {
+    final respose = await _getCatsUseCase.call(text);
+    catSelected = respose[0];
     update();
   }
 }

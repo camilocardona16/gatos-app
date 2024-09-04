@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gatos_app/app/home/presentation/get/listado_page_controller.dart';
+import 'package:gatos_app/routes/app.routes.dart';
 import 'package:get/get.dart';
 
 class ListadoPage extends StatelessWidget {
@@ -59,27 +60,39 @@ class ListadoPage extends StatelessWidget {
                                           ? ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              child: Image.network(
-                                                controller
-                                                    .cats[index].image!.url,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                fit: BoxFit.cover,
-                                                loadingBuilder: (context, child,
-                                                    loadingProgress) {
-                                                  if (loadingProgress == null) {
-                                                    return child;
-                                                  }
-                                                  return const Padding(
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
-                                                    child: Center(
-                                                      child:
-                                                          CircularProgressIndicator(),
-                                                    ),
-                                                  );
-                                                },
+                                              child: Hero(
+                                                tag: 'foto-gato',
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    Get.toNamed(
+                                                        '${AppRoutes.detalle}/${Uri.encodeComponent(controller.cats[index].name.replaceAll(' ', '%'))}');
+                                                  },
+                                                  child: Image.network(
+                                                    controller
+                                                        .cats[index].image!.url,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    fit: BoxFit.cover,
+                                                    loadingBuilder: (context,
+                                                        child,
+                                                        loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) {
+                                                        return child;
+                                                      }
+                                                      return const Padding(
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
                                               ),
                                             )
                                           : Image.asset(
