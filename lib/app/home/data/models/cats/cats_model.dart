@@ -3,24 +3,6 @@ import 'package:gatos_app/app/home/domain/entities/document.dart';
 List<Cat> catsFromJson(List<dynamic> str) =>
     List<CatModel>.from(str.map((x) => CatModel.fromJson(x)));
 
-// class CatModel extends Cat {
-//   CatModel(
-//       {required int id,
-//       required String code,
-//       required String name,
-//       required int idV2,
-//       required int country})
-//       : super(id: id, code: code, name: name, idV2: idV2, country: country);
-
-//   factory CatModel.fromJson(Map<String, dynamic> json) => CatModel(
-//         id: json["id"],
-//         code: json["code"],
-//         name: json["name"],
-//         idV2: json["id_v2"],
-//         country: json["country"],
-//       );
-// }
-
 class CatModel extends Cat {
   CatModel({
     required WeightCat weight,

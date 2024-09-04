@@ -40,11 +40,59 @@ class ListadoPage extends StatelessWidget {
                         return Card(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              controller.cats[index].name,
-                              style: const TextStyle(
-                                fontSize: 20,
-                              ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  controller.cats[index].name,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                controller.cats[index].image?.url != null
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          controller.cats[index].image!.url,
+                                          height: 100,
+                                          width: 100,
+                                          fit: BoxFit.cover,
+                                          loadingBuilder: (context, child,
+                                              loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            }
+                                            return const Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : Image.asset(
+                                        'assets/images/not-found.jpg',
+                                        height: 100,
+                                        width: 100,
+                                        fit: BoxFit.cover,
+                                      ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  'Pais de origen: ${controller.cats[index].origin}',
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  'Inteligencia: ${controller.cats[index].intelligence}',
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );
