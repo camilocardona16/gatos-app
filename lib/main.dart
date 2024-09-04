@@ -1,22 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:gatos_app/app/home/di.dart';
 import 'package:gatos_app/app/splash/splash_page.dart';
+import 'package:gatos_app/routes/app.pages.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    homeDI();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      title: 'GASTOS APP',
+    return GetMaterialApp(
+      title: 'CATBREEDS',
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
-      // getPages: AppPages.pages,
+      home: const SplashPage(),
+      getPages: AppPages.pages,
+      theme: ThemeData(
+          fontFamily: "Intel",
+          primarySwatch: Colors.brown,
+          primaryColor: Colors.red,
+          secondaryHeaderColor: Colors.lightGreen,
+          appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.black),
+          )),
     );
   }
 }
